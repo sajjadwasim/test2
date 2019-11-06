@@ -1,0 +1,15 @@
+---
+## playbook to install a package
+
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+  tasks:
+    - name: "install pydf"
+      tags:
+        - packages
+      apt:
+        state: present
+        pkg:
+          - pydf
