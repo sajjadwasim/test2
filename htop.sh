@@ -1,4 +1,13 @@
-#!/bin/bash
-sudo apt-get update
-sudo apt-get install htop
+---
+## playbook to install a package
 
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: "install htop"
+      tags:
+        - packages
+      apt:
+        state: present
+        pkg:
+          - htop
