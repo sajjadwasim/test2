@@ -18,7 +18,7 @@
 #    ignore_errors: True
 #  - command: rm -rf /tmp/.X11*
 #  - command: bash NVIDIA-Linux-x86_64-{{driver}}-no-compat32.run -q -a --ui=none --uninstall
-#  - command: bash NVIDIA-Linux-x86_64-{{driver}}-no-compat32.run -q -a --ui=none
+   - command: bash NVIDIA-Linux-x86_64-{{driver}}-no-compat32.run -q -a --ui=none
 #  - shell: nvidia-xconfig < /dev/null
 #  - service: name=nvidia-docker state=started
 #    ignore_errors: True
