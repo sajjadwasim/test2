@@ -10,7 +10,7 @@
     driver_url: http://us.download.nvidia.com/XFree86/Linux-x86_64/{{driver}}/NVIDIA-Linux-x86_64-340.107.run
   tasks:
     - get_url: dest=. url={{driver_url}}
-- name: Install nvidia-docker
-  apt:
-    name: nvidia-driver-{{driver}}
-    update_cache: yes 
+    - name: Install nvidia-docker
+      apt:
+        name: nvidia-driver-{{driver}}
+        update_cache: yes 
