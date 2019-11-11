@@ -6,8 +6,8 @@
   become_user: root
   gather_facts: no
   vars:
-    driver: 340.107
-    driver_url: http://us.download.nvidia.com/XFree86/Linux-x86_64/{{driver}}/NVIDIA-Linux-x86_64-340.107.run
+    driver: 440.31
+    driver_url: http://us.download.nvidia.com/XFree86/Linux-x86_64/{{driver}}/NVIDIA-Linux-x86_64-440.31.run
   tasks:
   - get_url: dest=. url={{driver_url}}
 #  - command: systemctl isolate multi-user.target
