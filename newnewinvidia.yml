@@ -10,8 +10,4 @@
     driver_url: http://us.download.nvidia.com/XFree86/Linux-x86_64/{{driver}}/NVIDIA-Linux-x86_64-340.107.run
   tasks:
   - get_url: dest=. url={{driver_url}}
-- name: "install_nvidia: Install the nvidia run file"
-  tags:
-    - packages
-    - nvidia_driver
-  shell: "{{ dest }} --silent --dkms --disable-nouveau --no-cc-version-check"
+    shell: "{{dest}} --silent --dkms --disable-nouveau --no-cc-version-check"
