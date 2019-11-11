@@ -6,9 +6,10 @@
   become_user: root
   gather_facts: no
   tasks:
-          apt:
-          name: "{{packages}}"
-          state: present
-          vars:
-                packages:
-                   - nvidia-driver-390
+  - name: Ansible apt with_items example
+    apt:
+      name: "{{ item }}"
+      update_cache: true
+      state: present
+      with_items:
+        - 'nvidia-driver-390'
