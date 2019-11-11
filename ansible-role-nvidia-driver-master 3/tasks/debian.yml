@@ -1,0 +1,52 @@
+---
+
+- name: cuda-drivers in NVIDIA APT repository is removed
+  apt:
+    name: cuda-drivers
+    state: absent
+    autoremove: yes
+    install_recommends: no
+    update_cache: "{{ 'yes' if not ansible_check_mode | bool else 'no' }}"
+  when:
+    nvidia_driver_package_name != "cuda-drivers" and
+    (not ansible_check_mode or not nvidia_repo_cuda_apt_repo.changed|default(true))
+
+- name: software-properties-common is installed for prerequisite for apt_repository ansible module
+  apt:
+    name: software-properties-common
+    state: present
+  when: nvidia_driver_repo == "ppa"
+
+- name: graphics-driver ppa APT repository is registered
+  apt_repository:
+    repo: ppa:graphics-drivers/ppa
+    filename: graphics-driver
+    state: present
+    mode: 0644
+    update_cache: "{{ 'yes' if not ansible_check_mode | bool else 'no' }}"
+  when: nvidia_driver_repo == "ppa"
+  register: nvidia_driver_ppa_apt_repo
+
+- name: NVIDIA graphics driver {{ nvidia_driver_package_name }} is installed
+  apt:
+    name: "{{ nvidia_driver_packages | reject('equalto', '') | list }}"
+    state: present
+    install_recommends: no
+    update_cache: "{{ 'yes' if not ansible_check_mode | bool else 'no' }}"
+  when:
+    not ansible_check_mode or
+    ((nvidia_driver_repo == "ubuntu") or
+     (nvidia_driver_repo == "ppa" and not nvidia_driver_ppa_apt_repo.changed|default(true)) or
+     (nvidia_driver_repo == "nvidia" and not nvidia_repo_cuda_apt_repo.changed|default(true)))
+  vars:
+    nvidia_driver_libcuda_package: "libcuda1-{{ nvidia_driver_version_major }}={{ nvidia_driver_package_version }}"
+    nvidia_driver_packages:
+      - "{{ nvidia_driver_package_name }}={{ nvidia_driver_package_version }}"
+      - "{{ nvidia_driver_libcuda_package if nvidia_driver_package_name != 'cuda-drivers' else '' }}"
+
+- name: disable nonveau, opensource version of NVIDIA graphics driver
+  lineinfile:
+    dest: /etc/default/grub
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT nouveau.modeset=0"'
+    validate: 'sh -n %s'
+    create: yes
