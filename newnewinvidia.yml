@@ -11,10 +11,10 @@
   tasks:
   - get_url: dest=. url={{driver_url}}
   - command: systemctl isolate multi-user.target
-  - service: name=nvidia-docker state=stopped
-  - shell: pkill nvidia-docker-plugin || true
-  - shell: rmmod nvidia_uvm nvidia_drm nvidia_modeset nvidia || true
-  - modprobe: name=nvidia state=absent
+#  - service: name=nvidia-docker state=stopped
+#  - shell: pkill nvidia-docker-plugin || true
+#  - shell: rmmod nvidia_uvm nvidia_drm nvidia_modeset nvidia || true
+#  - modprobe: name=nvidia state=absent
     ignore_errors: True
   - command: rm -rf /tmp/.X11*
   - command: bash NVIDIA-Linux-x86_64-{{driver}}-no-compat32.run -q -a --ui=none --uninstall
