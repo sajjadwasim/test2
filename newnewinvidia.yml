@@ -1,7 +1,7 @@
 ---
 ##playbook to install packages
 
-- hosts: install
+- hosts: all
   become: yes
   become_user: root
   gather_facts: no
