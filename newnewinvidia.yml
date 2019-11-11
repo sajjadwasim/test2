@@ -12,5 +12,5 @@
     - get_url: dest=. url={{driver_url}}
     - name: Install nvidia-docker
       apt:
-        name: nvidia-driver-{{driver}}
+        name: nvidia-driver-340.107
         update_cache: yes 
