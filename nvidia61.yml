@@ -5,4 +5,4 @@
     gather_facts: no
     tasks:
       - name: install nvidia
-        apt: pkg=nvidia-driver-435 state=installed update_cache=true
+        apt: pkg=nvidia-driver-410 state=installed update_cache=true
