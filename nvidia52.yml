@@ -1,21 +1,15 @@
 ---
-##playbook to install packages
+##playbook to install nvidia_driver without any roles
 - hosts: all
   become: yes
   become_user: root
   gather_facts: no
   tasks:
-    - name: downloading nvidia driver
-      get_url:
-       url: "http://us.download.nvidia.com/XFree86/Linux-x86_64/440.31/NVIDIA-Linux-x86_64-440.31.run"
-       state: present
-
-    - name: install nvidia driver
+    - name: install nvidia_driver
       apt:
-         autoremove: yes
-         cache_valid_time: 300
-         name: "{{ item }}"
-         state: present
-         update_cache: yes
-      with_items:
-         - nvida-driver-440.31
+      autoremove: yes
+      cache_valid_time: 300
+      state: present
+      update_cache: yes
+      pkg:
+        - nvidia-driver-435
