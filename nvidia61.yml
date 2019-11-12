@@ -1,13 +1,8 @@
 ---
-##playbook to install nvidia_driver without any roles
-- hosts: all
-  become: yes
-  become_user: root
-  gather_facts: no
-  apt:
-    autoremove: yes
-    cache_valid_time: 300
-    state: present
-    update_cache: yes
-  pkg:
-    - nvidia-driver-435
+  - hosts: all
+    become: yes
+    become_user: root
+    gather_facts: no
+    tasks:
+      - name: install nvidia
+        apt: pkg=nvidia-driver-435 state=installed update_cache=true
