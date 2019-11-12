@@ -7,11 +7,11 @@
   tasks:
     - name: Download my_package
       get_url:
-        url="{{ http://us.download.nvidia.com/XFree86/Linux-x86_64/440.31/NVIDIA-Linux-x86_64-440.31.run}}.deb"
+        url="{{ http://us.download.nvidia.com/XFree86/Linux-x86_64/440.31/NVIDIA-Linux-x86_64-440.31.run}}"
         dest="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name}}"
-      when: my_package_check_deb.rc == 1
+      when: my_package_check == 1
 
     -  name: Install my_package
-       apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name}}.deb"
+       apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ my_package_name}}"
        sudo: true
-       when: my_package_check_deb.rc == 1
+       when: my_package_check == 1
