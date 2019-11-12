@@ -5,13 +5,13 @@
   become_user: root
   gather_facts: no
   tasks:
-- name: Download my_package
-  get_url:
-    url="{{ http://us.download.nvidia.com/XFree86/Linux-x86_64/440.31/NVIDIA-Linux-x86_64-440.31.run}}"
-    dest="/home/{{ ansible_env.USER }}/Downloads/{{ NVIDIA-Linux-x86_64-440.31.run }}"
-  when: my_package_check_deb.rc == 1
+    - name: Download my_package
+      get_url:
+        url="{{ http://us.download.nvidia.com/XFree86/Linux-x86_64/440.31/NVIDIA-Linux-x86_64-440.31.run}}"
+        dest="/home/{{ ansible_env.USER }}/Downloads/{{ NVIDIA-Linux-x86_64-440.31.run }}"
+      when: my_package_check_deb.rc == 1
 
-- name: Install my_package
-  apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ NVIDIA-Linux-x86_64-440.31.run}}"
-  sudo: true
-  when: my_package_check_deb.rc == 1
+    -  name: Install my_package
+       apt: deb="/home/{{ ansible_env.USER }}/Downloads/{{ NVIDIA-Linux-x86_64-440.31.run}}"
+       sudo: true
+       when: my_package_check_deb.rc == 1
