@@ -1,0 +1,8 @@
+---
+# handlers file for nvidia-driver
+- name: Start nvidia
+  service: name=nvidia-driver-430 state=started
+
+- name: Reload nvidia
+  service: name=nvidia-driver-430 state=Reload
+  

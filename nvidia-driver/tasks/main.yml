@@ -1,0 +1,16 @@
+---
+# tasks file for nvidia-driver
+- name: Add Nvidia Repository
+  apt_repository: repo='ppa:graphics-drivers ' state=present
+  register: ppastable
+
+- name: Remove nvidia
+  when: nvidia-driver-430.stat.exists
+  register: nvidia_removed
+  shell: "nvidia-driver-430 --uninstall --slient"
+
+- name: install nvidia
+  apt: pkg=nvidia-driver-430 state=installed update_cache=true
+
+- name: reboot the sever
+  reboot:
