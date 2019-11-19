@@ -1,7 +1,7 @@
 ---
 # tasks file for nvidia-driver
 - name: Add Nvidia Repository
-  apt_repository: repo='ppa:graphics-drivers ' state=present
+  apt_repository: repo='ppa:graphics-drivers' state=present
   register: ppastable
 
 - name: Remove nvidia
