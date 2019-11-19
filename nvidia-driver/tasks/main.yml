@@ -5,12 +5,12 @@
   register: ppastable
 
 - name: Remove nvidia
-  when: nvidia-driver-430.stat.exists
-  register: nvidia_removed
-  shell: "nvidia-driver-430 --uninstall --slient"
+  apt: pkg={{item}} state=absent purge=yes force=yes
+  with_items:
+  - nvidia*
 
-- name: install nvidia
-  apt: pkg=nvidia-driver-430 state=installed update_cache=true
+#- name: install nvidia
+ # apt: pkg=nvidia-driver-430 state=installed update_cache=true
 
-- name: reboot the sever
-  reboot:
+#- name: reboot the sever
+#  reboot:
