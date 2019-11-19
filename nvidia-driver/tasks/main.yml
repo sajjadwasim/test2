@@ -9,8 +9,8 @@
   with_items:
   - nvidia*
 
-#- name: install nvidia
- # apt: pkg=nvidia-driver-430 state=installed update_cache=true
+- name: install nvidia
+  apt: pkg=nvidia-driver-430 state=installed update_cache=true
 
-#- name: reboot the sever
-#  reboot:
+- name: reboot the sever
+  reboot:
